@@ -83,19 +83,22 @@ internal class CallingSDKInitializer(
     }
 
     fun setupCallClient(): CompletableFuture<CallClient>? {
-        if (callClientCompletableFuture == null ||
-            callClientCompletableFuture!!.isCompletedExceptionally
-        ) {
+        if (callClientCompletableFuture == null || callClientCompletableFuture!!.isCompletedExceptionally) {
             callClientCompletableFuture = CompletableFuture<CallClient>()
             if (callClientInternal == null) {
                 val callClientOptions = CallClientOptions().also {
                     it.setTags(DiagnosticConfig().tags, logger)
+
+                    CallProxyConfig.proxyUrl?.let { url ->
+                        val network = CallNetworkOptions().setProxyUrl(url)
+                        it.setNetwork(network)
+                    }
                 }
+
                 callClientInternal = CallClient(callClientOptions)
                 callClientCompletableFuture?.complete(callClientInternal)
             }
         }
-
         return callClientCompletableFuture
     }
 
