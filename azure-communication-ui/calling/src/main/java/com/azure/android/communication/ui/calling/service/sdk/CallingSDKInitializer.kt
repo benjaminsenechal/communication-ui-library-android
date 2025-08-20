@@ -8,6 +8,8 @@ import com.azure.android.communication.calling.CallAgentOptions
 import com.azure.android.communication.calling.CallClient
 import com.azure.android.communication.calling.CallClientOptions
 import com.azure.android.communication.calling.IncomingCall
+import com.azure.android.communication.calling.CallNetworkOptions
+import com.azure.android.communication.ui.calling.config.CallProxyConfig
 import com.azure.android.communication.calling.IncomingCallListener
 import com.azure.android.communication.calling.PropertyChangedListener
 import com.azure.android.communication.calling.PushNotificationInfo
